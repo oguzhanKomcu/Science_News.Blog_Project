@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Science_News.Application.AutoMapper;
+using Science_News.Application.Services.CategoryService;
 using Science_News.Domain.Repositories;
 using Science_News.Infrastructure.Repositories;
 using System;
@@ -24,7 +25,7 @@ namespace Science_News.Application.IoC
             builder.RegisterType<AppUserRepo>().As<IAppUserRepo>().InstancePerLifetimeScope();
             builder.RegisterType<PostRepo>().As<IPostRepo>().InstancePerLifetimeScope();
 
-            //builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             //builder.RegisterType<AuthorService>().As<IAuthorService>().InstancePerLifetimeScope();
             //builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             //builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();

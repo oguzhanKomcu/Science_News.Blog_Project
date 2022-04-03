@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Science_News.Application.Models.DTOs.Category;
+using Science_News.Application.Models.VMs;
 using Science_News.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,10 +17,10 @@ namespace Science_News.Application.AutoMapper
         {
 
 
-            //    CreateMap<Category, CreateCategoryDTO>().ReverseMap();
-            //    CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
-            //    CreateMap<Category, CategoryVM>().ReverseMap();
-            //    CreateMap<UpdateCategoryDTO, CategoryVM>().ReverseMap();
+                CreateMap<Category, CreateCategoryDTO>().ReverseMap();
+                CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+                CreateMap<Category, CategoryVM>().ReverseMap();
+                CreateMap<UpdateCategoryDTO, CategoryVM>().ReverseMap();
 
 
 

@@ -4,6 +4,7 @@ using Science_News.Application.Services.CategoryService;
 
 namespace Science_News.Presantation.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -42,6 +43,33 @@ namespace Science_News.Presantation.Areas.Admin.Controllers
         {
             var categories = await _categoryService.GetGenres();
             return View(categories);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUpdate(int id)
+        {
+           
+            return View(await _categoryService.GetById(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateCategoryDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _categoryService.Update(model);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _categoryService.Delete(id);
+            return RedirectToAction("List");
         }
     }
 }

@@ -18,18 +18,19 @@ namespace Science_News.Application.Services.CategoryService
         private readonly IMapper _mapper;
 
 
-        public CategoryService(ICategoryRepo categoryRepo)
+        public CategoryService(ICategoryRepo categoryRepo , IMapper mapper )
         {
             _categoryRepo = categoryRepo;
+            _mapper = mapper;       
         }
         
 
 
-        public Task Create(CreateCategoryDTO model)
+        public async Task Create(CreateCategoryDTO model)
         {
             var category = _mapper.Map<Category>(model);
             
-            return _categoryRepo.Create(category);
+            await _categoryRepo.Create(category);
         }
 
         public async Task Delete(int id)
