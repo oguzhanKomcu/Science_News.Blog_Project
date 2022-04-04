@@ -12,12 +12,12 @@ namespace Science_News.Domain.Entities
     public class Author : IBaseEntity
     {
         public int Id { get; set; }
-        public string FirtName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ImagePath { get; set; }
 
         [NotMapped]
-        public IFormFile ImageUpload { get; set; }
+        public IFormFile UploadPath { get; set; }
 
         public Status Status { get; set; }
         public DateTime CreateDate { get; set; }

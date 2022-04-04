@@ -18,6 +18,6 @@ namespace Science_News.Application.Services.CategoryService
 
         Task<UpdateCategoryDTO> GetById(int id);
 
-        Task<bool> isGenreExsist(string Name);
+        Task<bool> isCategoryExsist(string Name);
     }
 }

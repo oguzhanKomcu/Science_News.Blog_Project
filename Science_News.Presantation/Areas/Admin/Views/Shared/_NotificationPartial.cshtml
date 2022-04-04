@@ -1,0 +1,20 @@
+﻿@if (TempData["Success"] != null)
+{
+    <div class="alert alert-Success notification"> @*"notification" is the name we give to the alert. It could be any name.*@
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Warning"] != null)
+{
+    <div class="alert alert-Success notification">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-Success notification">
+        @TempData["Success"]
+    </div>
+}

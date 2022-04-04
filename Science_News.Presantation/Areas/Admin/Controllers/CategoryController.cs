@@ -25,15 +25,28 @@ namespace Science_News.Presantation.Areas.Admin.Controllers
         [HttpPost]
         public async  Task<IActionResult> Create(CreateCategoryDTO model)
         {
-            
-            
-            if   (ModelState.IsValid)
+
+
+            if (ModelState.IsValid)
             {
-                await _categoryService.Create(model);
-                return RedirectToAction("List");
-            }   
+
+                bool result = await _categoryService.isCategoryExsist(model.Name);
+                if (!result)
+                {
+                    TempData["Success"] = $"{model.Name} has been added..!!";
+                    await _categoryService.Create(model);
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    TempData["Warning"] = $"{model.Name} already has been added..!!";
+                    return View(model);
+                }
+
+            }
             else
             {
+                TempData["Erorr"] = $"{model.Name} hasn't been added..!!";
                 return View(model);
             }
 

@@ -72,7 +72,7 @@ namespace Science_News.Application.Services.CategoryService
             return category;
         }
 
-        public Task<bool> isGenreExsist(string Name)
+        public Task<bool> isCategoryExsist(string Name)
         {
             var result = _categoryRepo.Any(x => x.Name == Name);
             return result;

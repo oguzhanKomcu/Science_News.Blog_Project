@@ -4,17 +4,18 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="row ml-2 mt-2 mr-2">
+	<div class="row ml-2 mt-2 mr-2">
 		<div class="col-sm-6">
 			<div class="card card-primary">
 				<div class="card-header">
-					<h3 class="card-title">Create Category</h3>
+					<h3 class="card-title">Update Category</h3>
 				</div>
-				<form asp-area="Admin" asp-controller="Category" asp-action="Create" method="post">
+				<form asp-action="Update">
 					<div class="card-body">
 						<div class="form-group">
 							<label asp-for="Name"></label>
 							<input class="form-control" placeholder="Category Name" asp-for="Name">
+							<span asp-validation-for="Name" class="text-danger"></span> 
 						</div>
 					</div>
 					<div class="card-footer">
@@ -23,7 +24,7 @@
 					</div>
 				</form>
 			</div>
-		</div>
+		</div>                
 	</div>
 
 
