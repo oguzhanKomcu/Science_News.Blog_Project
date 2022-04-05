@@ -31,18 +31,18 @@ namespace Science_News.Application.Services.AuthorService
         {
             var author = _mapper.Map<Author>(model);
 
-            if (author.ImagePath != null)
+            if (author.UploadPath != null)
             {
-                using var image = Image.Load(model.UploadPath.OpenReadStream());
-                image.Mutate(x => x.Resize(600, 560));
+                using var image = Image.Load(model.UploadPath.OpenReadStream()); 
+                image.Mutate(x => x.Resize(600, 560)); 
                 Guid guid = Guid.NewGuid();
-                image.Save($"/wwwroot/images/{guid}.jpg");
-                author.ImagePath = ($"/wwwroot/images/{guid}.jpg");
+                image.Save($"wwwroot/images/{guid}.jpg"); 
+                author.ImagePath = ($"/images/{guid}.jpg");
                 await _authorRepo.Create(author);
             }
             else
             {
-                author.ImagePath = ($"/wwwroot/images/default.jpg");
+                author.ImagePath = ($"/images/default.jpg");
                 await _authorRepo.Create(author);
             }
         }
@@ -55,22 +55,21 @@ namespace Science_News.Application.Services.AuthorService
             await _authorRepo.Delete(author);
         }
 
-        public Task<List<AuthorVM>> GetAuthors()
+        public async Task<List<AuthorVM>> GetAuthors()
         {
-           var author = _authorRepo.GetFilteredList(
-               select : x => new AuthorVM
-               {
-                   Id = x.Id,
-                   FirstName = x.FirstName,
-                   LastName = x.LastName,
-                   ImagePath = x.ImagePath,
-                   
+            var authors = await _authorRepo.GetFilteredList(
+                select: x => new AuthorVM
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    ImagePath = x.ImagePath,
+                },
+                where: x => x.Status != Status.Passive,
+                orderBy: x => x.OrderBy(x => x.FirstName));
 
-               },
-               where: x=> x.Status != Status.Passive,
-               orderBy: x => x.OrderBy(y => y.FirstName));
+            return authors;
 
-            return author;
         }
 
         public async Task<UpdateAuthorDTO> GetById(int id)
@@ -84,43 +83,55 @@ namespace Science_News.Application.Services.AuthorService
                     LastName = x.LastName,
                     ImagePath = x.ImagePath,
                 },
-                where: x => x.Id == id);
+                where: x => x.Id == id,
+                 orderBy: x => x.OrderBy(x => x.FirstName));
 
             var model = _mapper.Map<UpdateAuthorDTO>(author);
 
             return model;
         }
 
-        public Task<List<AuthorDetailsVM>>  GetDetails(int id)
+        public async Task<AuthorDetailsVM> GetDetails(int id)
         {
-            var author = _authorRepo.GetFilteredList(
-              select: x => new AuthorDetailsVM
-              {
-                  Id = x.Id,
-                  FirstName = x.FirstName,
-                  LastName = x.LastName,
-                  ImagePath = x.ImagePath,
-                  CreateDate = x.CreateDate,    
+            var authors = await _authorRepo.GetFilteredFirstOrDefault(
+                select: x => new AuthorDetailsVM
+                {
 
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    ImagePath = x.ImagePath,
+                    CreateDate = x.CreateDate
+                },
+                where: x => x.Id == id);
 
-
-              },
-              where: x => x.Status != Status.Passive,
-              orderBy: x => x.OrderBy(y => y.FirstName));
-
-            return author;
+            return authors;
         }
 
-        public Task<bool> isAuthorExsist(string name)
+        public Task<bool> isAuthorExsist(string Firstname, string LastName)
         {
-            var result = _authorRepo.Any(x => x.FirstName == name);
+            var result = _authorRepo.Any(x => x.FirstName == Firstname && x.LastName == LastName);
             return result;
         }
 
         public async Task Update(UpdateAuthorDTO model)
         {
-            var updateAuthor = _mapper.Map<Author>(model);
-            await _authorRepo.Update(updateAuthor);
+            var author = _mapper.Map<Author>(model);
+
+            if (author.UploadPath != null)
+            {
+                using var image = Image.Load(model.UploadPath.OpenReadStream());
+                image.Mutate(x => x.Resize(600, 560));
+                Guid guid = Guid.NewGuid();
+                image.Save($"wwwroot/images/{guid}.jpg");
+                author.ImagePath = ($"/images/{guid}.jpg");
+
+                await _authorRepo.Update(author);
+            }
+            else
+            {
+                author.ImagePath = model.ImagePath;
+                await _authorRepo.Update(author);
+            }
 
         }
     }

@@ -1,0 +1,64 @@
+﻿@model AuthorDetailsVM
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">@Model.FirstName  Model.LastName Details</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tiles</th>
+                                <th>Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Id</td>
+                                <td>@Model.Id</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>@Model.FirstName</td>
+                            </tr>
+                            <tr>
+                                <td>Platform</td>
+                                <td>@Model.LastName</td>
+                            </tr>
+                            <tr>
+                                <td>Dimension</td>
+                                <td>@Model.ImagePath</td>
+                            </tr>
+                            <tr>
+                                <td>Release_Date</td>
+                                <td>@Model.CreateDate</td>
+                            </tr>
+                            <tr>
+                                <td>Language</td>
+                                <td>@Model.UpdateDate</td>
+                            </tr>
+                            <tr>
+                                <td>Developer_Company</td>
+                                <td>@Model.DeleteDate</td>
+                            </tr>
+                           
+                            <tr>
+                                <td>Status</td>
+                                <td>@Model.Status</td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

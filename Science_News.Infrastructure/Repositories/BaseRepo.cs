@@ -99,7 +99,7 @@ namespace Science_News.Infrastructure.Repositories
 
             if (orderBy != null)
             {
-                return await orderBy(query).Select(select).ToListAsync();
+                return  await orderBy(query).Select(select).ToListAsync();
             }
             else
             {

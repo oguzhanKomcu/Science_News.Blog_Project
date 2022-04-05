@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Science_News.Application.AutoMapper;
+using Science_News.Application.Services.AuthorService;
 using Science_News.Application.Services.CategoryService;
 using Science_News.Domain.Repositories;
 using Science_News.Infrastructure.Repositories;
@@ -19,14 +20,14 @@ namespace Science_News.Application.IoC
         protected override void Load(ContainerBuilder builder)
         {
 
-            //bunları burada register ediyoruz 
+            
             builder.RegisterType<CategoryRepo>().As<ICategoryRepo>().InstancePerLifetimeScope();
             builder.RegisterType<AuthorRepo>().As<IAuthorRepo>().InstancePerLifetimeScope();
             builder.RegisterType<AppUserRepo>().As<IAppUserRepo>().InstancePerLifetimeScope();
             builder.RegisterType<PostRepo>().As<IPostRepo>().InstancePerLifetimeScope();
 
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
-            //builder.RegisterType<AuthorService>().As<IAuthorService>().InstancePerLifetimeScope();
+            builder.RegisterType<AuthorService>().As<IAuthorService>().InstancePerLifetimeScope();
             //builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             //builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
 

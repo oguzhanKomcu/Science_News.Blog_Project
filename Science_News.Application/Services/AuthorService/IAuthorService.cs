@@ -16,10 +16,10 @@ namespace Science_News.Application.Services.AuthorService
 
         Task<List<AuthorVM>> GetAuthors();
 
-        Task<List<AuthorDetailsVM>> GetDetails(int id);
+        Task<AuthorDetailsVM> GetDetails(int id);
 
         Task<UpdateAuthorDTO> GetById(int id);
 
-        Task<bool> isAuthorExsist(string userName);
+        Task<bool> isAuthorExsist(string Firstname, string LastName);
     }
 }

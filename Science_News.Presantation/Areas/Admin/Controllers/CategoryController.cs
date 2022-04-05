@@ -59,7 +59,7 @@ namespace Science_News.Presantation.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUpdate(int id)
+        public async Task<IActionResult> Update(int id)
         {
            
             return View(await _categoryService.GetById(id));

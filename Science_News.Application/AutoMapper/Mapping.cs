@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Science_News.Application.Models.DTOs.Author;
 using Science_News.Application.Models.DTOs.Category;
 using Science_News.Application.Models.VMs;
 using Science_News.Domain.Entities;
@@ -24,11 +25,11 @@ namespace Science_News.Application.AutoMapper
 
 
 
-            //    CreateMap<Author, CreateAuthorDTO>().ReverseMap();
-            //    CreateMap<Author, UpdateAuthorDTO>().ReverseMap();
-            //    CreateMap<Author, AuthorVM>().ReverseMap();
-            //    CreateMap<UpdateAuthorDTO, AuthorVM>().ReverseMap();
-            //}
+                CreateMap<Author, CreateAuthorDTO>().ReverseMap();
+                CreateMap<Author, UpdateAuthorDTO>().ReverseMap();
+                CreateMap<Author, AuthorVM>().ReverseMap();
+                CreateMap<UpdateAuthorDTO, AuthorVM>().ReverseMap();
+            
         }
 
     }

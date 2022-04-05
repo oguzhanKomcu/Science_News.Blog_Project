@@ -17,9 +17,9 @@ namespace Science_News.Application.Extensions
             if (file != null)
             {
                 var extension = Path.GetExtension(file.FileName);
-                string[] extensions = { ".jpg", ".png", ".jpeg" };  // add more extensions here
+                string[] extensions = { "jpg", "png", "jpeg" };  // add more extensions here
 
-                bool result = extensions.Any(x => extension.EndsWith(x));
+                bool result = extensions.Any(x => extension.ToLower().EndsWith(x));
 
                 if (!result)
                 {

@@ -1,0 +1,39 @@
+﻿@model CreateAuthorDTO
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row ml-2 mt-2 mr-2">
+		<div class="col-sm-6">
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title">Create Author</h3>
+
+				</div>
+				<form asp-action="Create" enctype="multipart/form-data">
+					<div class="card-body">
+						<div class="form-group">
+							<label asp-for="FirstName"></label>
+							<input class="form-control" placeholder="First Name" asp-for="FirstName">
+							<span asp-validation-for="FirstName" class="text-danger"></span>
+						</div>
+                        <div class="form-group">
+							<label asp-for="LastName"></label>
+							<input class="form-control" placeholder="Last Name" asp-for="LastName">
+							<span asp-validation-for="LastName" class="text-danger"></span>
+						</div>
+                        <div class="form-group">
+							<label asp-for="UploadPath"></label>
+							<input class="form-control" type="file" asp-for="UploadPath">
+							<span asp-validation-for="UploadPath" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a asp-action="List" class="btn btn-dark btn-sm mr-2 float-end">Back To List</a>
+						<input type="submit" class="btn btn-primary btn-sm float-end mr-2" value="Submit" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
