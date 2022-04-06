@@ -76,7 +76,7 @@ namespace Science_News.Application.Services.AuthorService
         {
 
             var author = await _authorRepo.GetFilteredFirstOrDefault(
-                select: x => new AuthorVM
+                select: x => new UpdateAuthorDTO
                 {
                     Id = x.Id,
                     FirstName = x.FirstName,
@@ -86,9 +86,9 @@ namespace Science_News.Application.Services.AuthorService
                 where: x => x.Id == id,
                  orderBy: x => x.OrderBy(x => x.FirstName));
 
-            var model = _mapper.Map<UpdateAuthorDTO>(author);
+            //var model = _mapper.Map<UpdateAuthorDTO>(author);
 
-            return model;
+            return author;
         }
 
         public async Task<AuthorDetailsVM> GetDetails(int id)

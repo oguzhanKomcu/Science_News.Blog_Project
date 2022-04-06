@@ -1,6 +1,8 @@
-﻿using Science_News.Domain.Enums;
+﻿using Microsoft.AspNetCore.Http;
+using Science_News.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,9 @@ namespace Science_News.Domain.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+
+        [NotMapped]
+        public IFormFile UploadPath { get; set; }
 
         public string ImagePath { get; set; }
 

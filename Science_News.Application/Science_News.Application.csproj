@@ -16,8 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Models\DTOs\AppUser\" />
-    <Folder Include="Models\DTOs\Post\" />
-    <Folder Include="Services\PostService\" />
   </ItemGroup>
 
   <ItemGroup>
