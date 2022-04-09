@@ -2,7 +2,7 @@
 
   I made the UI part of my blog project using Asp.Net Core MVC design pattern. I created the design of my project with Domain Driven Design. I used Autofac to implement IOC in this project. I made the methods and functions I used in my project by applying the asynchronous programming technique.
 
-##  Domaın DRIVEN DESIGN (DDD)
+##  DOMAIN DRIVEN DESIGN (DDD)
 
 <img src="https://user-images.githubusercontent.com/96787308/160295642-fe61dacc-46c2-4a58-80bf-081a1caac360.png" width="800" height="400">
 
@@ -16,6 +16,22 @@ DDD is created with 4-tier architecture.
 - Application Layer
 - Presentation Layer
 - Infrastructure Layer
+
+### Domain Layer
+
+This is where the concepts of the business domain are. This layer has all the information about the business case and the business rules. Here’s where the entities are. As we mentioned earlier, entities are a combination of data and behavior, like a user or a product. You can have a look at how I use it in my project.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Domain)
+
+### Application Layer
+
+This layer doesn’t contain business logic. It’s the part that leads the user from one to another UI screen. It also interacts with application layers of other systems. It can perform simple validation but it contains no domain-related logic or data access. Its purpose is to organize and delegate domain objects to do their job. Moreover, it’s the only layer accessible to other bounded contexts. You can have a look at how I use it in my project.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Application)
+
+### Presentation Layer
+
+This layer is the part where interaction with external systems happens. This layer is the gateway to the effects that a human, an application or a message will have on the domain. Requests will be accepted from this layer and the response will be shaped in this layer and displayed to the user. You can have a look at how I use it in my project.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Presantation)
+
+### Infrastructure Layer
+
+This layer will be the layer that accesses external services such as database, messaging systems and email services. It supports communication between other layers and may contain supporting libraries for the UI layer. [GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Infrastructure)
 
 
 ## ASYNCHRONOUS PROGRAMMING
