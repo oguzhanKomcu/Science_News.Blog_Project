@@ -20,4 +20,14 @@ DDD is created with 4-tier architecture.
 
 Asynchronous programming allows work to be split into parts and all processes to be continued at the same time. With Asynchronous Programming, while a code we wrote in our program is being run, other codes can be run within the same program. In this way, while the user is using a part of our program, he can also operate with another part.
 
-Asynchronous programming should not be confused with multi-threading. The codes that we will write asynchronously can also work on a single thread. The feature of asynchronous programming is not to run in different threads, but to ensure that more than one job is executed on our program at the same time by dividing the work we give into parts.
+Asynchronous programming should not be confused with multi-threading. The codes that we will write asynchronously can also work on a single thread. The feature of asynchronous programming is not to run in different threads, but to ensure that more than one job is executed on our program at the same time by dividing the work we give into parts.Asynchronous is about tasks. If the process executed by a thread requires waiting, instead of keeping the processor power idle, it switches to other jobs, does the work to be done in between, and continues the process that requires waiting from where it left off.
+
+If we want to use asynchronous programming, we should use the "async" , "await" , "Task<T>","Task" keywords that come with C# 5.0.
+  
+The async keyword is used to activate the “await” keyword inside the function. Await provides a non-blocking feature that allows other processes to continue asynchronously while waiting for the task to be executed. await can only be used in cases where Task returns, C# compiler It will give an error when using await for methods that do not return Task. Our method, DownloadAndProcessFile, in which we use the await operator, started with async. The await operator is used in async otherwise it will throw a compilation error.
+
+We will have methods that return a Task or Task<T> object. Defining these methods as asynchronous operations allows us to wait for them and continue to use the same execution sequence to run other operations that are unrelated to the expected task. We use the keywords "async" and "await" to process objects more easily.
+  
+ 
+
+
