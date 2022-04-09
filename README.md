@@ -1,4 +1,4 @@
-# BLOG PROJECT
+# ASP.NET CORE BLOG PROJECT
 
   I made the UI part of my blog project using Asp.Net Core MVC design pattern. I created the design of my project with Domain Driven Design. I used Autofac to implement IOC in this project. I made the methods and functions I used in my project by applying the asynchronous programming technique.
 
@@ -16,3 +16,8 @@ DDD is created with 4-tier architecture.
 - Infrastructure Layer
 
 
+## ASYNCHRONOUS PROGRAMMING
+
+Asynchronous programming allows work to be split into parts and all processes to be continued at the same time. With Asynchronous Programming, while a code we wrote in our program is being run, other codes can be run within the same program. In this way, while the user is using a part of our program, he can also operate with another part.
+
+Asynchronous programming should not be confused with multi-threading. The codes that we will write asynchronously can also work on a single thread. The feature of asynchronous programming is not to run in different threads, but to ensure that more than one job is executed on our program at the same time by dividing the work we give into parts.
