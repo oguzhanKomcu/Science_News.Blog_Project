@@ -4,7 +4,7 @@
 
 ##  DOMAIN DRIVEN DESIGN (DDD)
 
-<img src="https://user-images.githubusercontent.com/96787308/160295642-fe61dacc-46c2-4a58-80bf-081a1caac360.png" width="800" height="400">
+<img src="https://miro.medium.com/max/1400/0*28z_AXhf8mXoUihE.png" width="800" height="400">
 
   DDD is not an advanced technology or specific method. Domain Driven Design advocates a philosophy of how software should be modeled to adapt it to the digital world by creating real-world business models with a common language (Ubiquitous Language) that everyone can understand.
 
@@ -31,12 +31,12 @@ This layer is the part where interaction with external systems happens. This lay
 
 ### Infrastructure Layer
 
-This layer will be the layer that accesses external services such as database, messaging systems and email services. It supports communication between other layers and may contain supporting libraries for the UI layer. [GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Infrastructure)
+This layer will be the layer that accesses external services such as database, messaging systems and email services. It supports communication between other layers and may contain supporting libraries for the UI layer.You can have a look at how I use it in my project.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Infrastructure)
 
 
 ## ASYNCHRONOUS PROGRAMMING
 
-<img src="https://user-images.githubusercontent.com/96787308/160295642-fe61dacc-46c2-4a58-80bf-081a1caac360.png" width="800" height="400">
+<img src="https://www.baeldung.com/wp-content/uploads/sites/4/2020/07/sync.png" width="800" height="400">
 
 Asynchronous programming allows work to be split into parts and all processes to be continued at the same time. With Asynchronous Programming, while a code we wrote in our program is being run, other codes can be run within the same program. In this way, while the user is using a part of our program, he can also operate with another part.
 
@@ -77,5 +77,65 @@ We will have methods that return a Task or Task<T> object. Defining these method
             return posts;
         }
 ```
+## Expression in LINQ 
+  
+![alt text](https://www.tutorialsteacher.com/Content/images/linq/expression.png)
 
+  
+LINQ introduced the new type called Expression that represents strongly typed lambda expression. It means lambda expression can also be assigned to Expression<TDelegate> type. The .NET compiler converts the lambda expression which is assigned to Expression<TDelegate> into an Expression tree instead of executable code. This expression tree is used by remote LINQ query providers as a data structure to build a runtime query out of it .
+  
+  Implementation in the repository
+```csharp
+  public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> select,
+                                                                  Expression<Func<T, bool>> where,
+                                                                  Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                                                  Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+        {
+            IQueryable<T> query = table;
 
+            if (where != null)
+            {
+                query = query.Where(where);
+            }
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (orderBy != null)
+            {
+                return  await orderBy(query).Select(select).ToListAsync();
+            }
+            else
+            {
+                return await query.Select(select).ToListAsync();
+            }
+        }
+```
+  
+  
+Application in service
+  
+   ```csharp
+        public Task<List<PostVM>> GetPosts()
+        {
+            var posts = _postRepo.GetFilteredList(
+                select: x => new PostVM
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    CategoryName = x.Category.Name,
+                    AuthorFirstName = x.Author.FirstName,
+                    AuthorLastName = x.Author.LastName,
+                },
+                where: x => x.Status != Status.Passive,
+                orderBy: x => x.OrderBy(x => x.Title),
+                include: x => x.Include(x => x.Category).Include(x => x.Author));
+
+            return posts;
+
+        }
+  
+```
+  
