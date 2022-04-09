@@ -22,6 +22,7 @@ namespace Science_News.Application.Services.PostService
 
         Task<List<PostVM>> GetPosts();
 
+        Task<List<GetPostsVM>> GetPostsForMembers();
 
 
 

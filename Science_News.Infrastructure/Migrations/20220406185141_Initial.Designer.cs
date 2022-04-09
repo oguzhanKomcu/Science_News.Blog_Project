@@ -12,7 +12,7 @@ using Science_News.Infrastructure;
 namespace Science_News.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220405174032_Initial")]
+    [Migration("20220406185141_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

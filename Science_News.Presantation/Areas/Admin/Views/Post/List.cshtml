@@ -1,0 +1,56 @@
+﻿@model List<PostVM>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+	<div class="row ml-2 mt-2 mr-2">
+		<div class="col-sm-12">
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title">List of Post</h3>
+				</div>
+				<div class="card-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Title</th>
+								<th>Genre</th>
+								<th>Author</th>
+								<th>Details</th>
+								<th>Update</th>
+								<th>Delete</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td>@item.Id</td>
+									<td>@item.Title</td>
+									<td>@item.CategoryName</td>
+									<td>@item.FullName</td>
+									<td>
+										<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a> 
+									</td>
+									<td>
+										<a asp-action="Update" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Update</a>
+									</td>
+									<td>
+										<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					<a asp-action="Create" class="btn btn-block btn-dark">Create Genre</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+

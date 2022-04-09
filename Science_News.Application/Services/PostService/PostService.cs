@@ -155,6 +155,33 @@ namespace Science_News.Application.Services.PostService
 
         }
 
+        public async Task<List<GetPostsVM>> GetPostsForMembers()
+        {
+            var posts = await _postRepo.GetFilteredList(
+                select: x => new GetPostsVM
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Content = x.Content,
+                    ImagePath = x.ImagePath,
+                    CategoryName = x.Category.Name,
+                    AuthorFirstName = x.Author.FirstName,
+                    AuthorLastName = x.Author.LastName,
+                    CreateDate = x.CreateDate,
+                    UserImagePath = x.Author.ImagePath,
+
+
+                },
+                where: x => x.Status != Status.Passive,
+                orderBy: x => x.OrderByDescending(x => x.CreateDate),
+                include: x => x.Include(x => x.Author));
+
+            return posts;
+               
+               
+               
+        }
+
         public async Task<PostDetailsVM> PostDetails(int id)
         {
             var post = await _postRepo.GetFilteredFirstOrDefault(

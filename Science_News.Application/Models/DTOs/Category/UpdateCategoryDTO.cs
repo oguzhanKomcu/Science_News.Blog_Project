@@ -12,6 +12,6 @@ namespace Science_News.Application.Models.DTOs.Category
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime UpdateDate => DateTime.Now;
-        public Status Status => Status.Modifieed;
+        public Status Status => Status.Modified;
     }
 }

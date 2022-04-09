@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DTOs\AppUser\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Science_News.Domain\Science_News.Domain.csproj" />
     <ProjectReference Include="..\Science_News.Infrastructure\Science_News.Infrastructure.csproj" />
   </ItemGroup>

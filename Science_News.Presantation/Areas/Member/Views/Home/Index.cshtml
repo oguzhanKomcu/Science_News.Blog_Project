@@ -1,0 +1,84 @@
+﻿@model List<GetPostsVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+}
+
+
+
+<div class="container mt-2">
+    
+@foreach (var item in Model)
+{
+    <div class="col-md-8"> <!--sağ tarafa yapısmaması için -->
+        <div class="card card-widget mt-3">
+            <!--yapısmaması için mt-3 yazdık-->
+        <div class="card-header">
+                <div class="user-block">
+                    <img class="img-circle" src="@item.UserImagePath" alt="User Image">
+                    <span class="username"><a href="#">@item.FullName</a></span>
+                    <span class="description">Shared publicly - @item.CreateDate.ToShortDateString() /span>
+                </div>
+                <!-- /.user-block -->
+        </div>
+            <!-- /.card-header -->
+        <div class="card-body">
+                <img class="img-fluid pad" src="@item.ImagePath" alt="Photo">
+                <h4>@item.Title</h4>
+
+                <p class="card-text">@item.Content</p> <!--paragraf-->
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
+                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                <span class="float-right text-muted">127 likes - 3 comments</span>
+            </div>
+            <!-- /.card-body -->
+        <div class="card-footer card-comments">
+                <div class="card-comment">
+                    <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Maria Gonzales
+                            <span class="text-muted float-right">8:03 PM Today</span>
+                        </span><!-- /.username -->
+                        It is a long established fact that a reader will be distracted
+                        by the readable content of a page when looking at its layout.
+                </div>
+                    <!-- /.comment-text -->
+            </div>
+                <!-- /.card-comment -->
+            <div class="card-comment">
+                    <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="User Image">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Luna Stark
+                            <span class="text-muted float-right">8:03 PM Today</span>
+                        </span><!-- /.username -->
+                        It is a long established fact that a reader will be distracted
+                        by the readable content of a page when looking at its layout.
+                </div>
+                    <!-- /.comment-text -->
+            </div>
+                <!-- /.card-comment -->
+        </div>
+            <!-- /.card-footer -->
+        <div class="card-footer">
+                <form action="#" method="post">
+                    <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                    <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push">
+                        <input type="text" class="form-control form-control-sm" placeholder="Press enter to post comment">
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-footer -->
+    </div>
+    </div>
+
+}
+
+</div>
+</html>

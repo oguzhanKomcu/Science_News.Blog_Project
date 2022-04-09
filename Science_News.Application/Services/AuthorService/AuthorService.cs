@@ -35,9 +35,9 @@ namespace Science_News.Application.Services.AuthorService
             {
                 using var image = Image.Load(model.UploadPath.OpenReadStream()); 
                 image.Mutate(x => x.Resize(600, 560)); 
-                Guid guid = Guid.NewGuid();
-                image.Save($"wwwroot/images/{guid}.jpg"); 
-                author.ImagePath = ($"/images/{guid}.jpg");
+            
+                image.Save($"wwwroot/images/"); 
+                author.ImagePath = ($"/images/");
                 await _authorRepo.Create(author);
             }
             else

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Science_News.Application.Models.VMs
 {
-    public class PostVM
+    public class GetPostsVM
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -17,10 +17,8 @@ namespace Science_News.Application.Models.VMs
         public string AuthorLastName { get; set; }
         public string ImagePath { get; set; }
 
-
+        public DateTime CreateDate { get; set; }
         public string FullName => $"{AuthorFirstName} {AuthorLastName}";
-        public int CategoryId { get; set; }
-        public int AuthorId { get; set; }
-
+        public string UserImagePath { get; set; }
     }
 }

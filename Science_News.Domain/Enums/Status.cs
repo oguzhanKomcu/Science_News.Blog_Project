@@ -10,6 +10,6 @@ namespace Science_News.Domain.Enums
     {
         Active = 1,
         Passive = 2,
-        Modifieed = 3
+        Modified = 3
     }
 }

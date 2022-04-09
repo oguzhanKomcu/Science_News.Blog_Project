@@ -1,0 +1,68 @@
+﻿@model PostUpdateDTO
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+	<div class="row ml-2 mt-2 mr-2">
+		<div class="col-sm-6">
+			<div class="card card-primary">
+				<div class="card-header">
+					<h3 class="card-title">Update Post</h3>
+				</div>
+				<form asp-action="Update" enctype="multipart/form-data">
+					<input type="hidden" asp-for="ImagePath"/> 
+					<input type="hidden" asp-for="CategoryId"/>
+					<input type="hidden" asp-for="AuthorId"/>
+					<div class="card-body">
+						<div class="form-group">
+							<label asp-for="Title"></label>
+							<input class="form-control" placeholder="Title" asp-for="Title">
+                            <span asp-validation-for="Title" class="text-danger"></span> 
+							
+						</div>
+						<div class="form-group">
+							<label asp-for="Content"></label>
+							<input class="form-control" placeholder="Genre Name" asp-for="Content">
+                            <span asp-validation-for="Content" class="text-danger"></span> 
+						</div>
+						<div class="form-group">
+							<label asp-for="UploadPath"></label> 
+							<input class="form-control" type="file" asp-for="UploadPath">
+                            <span asp-validation-for="UploadPath" class="text-danger"></span> 
+							
+						</div>
+						<div class="form-group">
+							<label asp-for="AuthorId">Choose Author</label>
+							<select asp-for="AuthorId" class="form-control"> 
+								@foreach (var item in Model.Authors)
+								{
+									<option value="@item.Id">@item.FirstName @item.LastName</option> 
+								}
+							</select>
+							<span asp-validation-for="AuthorId" class="text-danger"></span>
+							
+						</div>
+							<div class="form-group">
+							<label asp-for="CategoryId">Choose Genre</label>
+							<select asp-for="CategoryId" class="form-control"> 
+								@foreach (var item in Model.Categories)
+								{
+									<option value="@item.Id">@item.Name</option> 
+								}
+							</select>
+							<span asp-validation-for="CategoryId" class="text-danger"></span>
+							
+						</div>
+
+					</div>
+					<div class="card-footer">
+						<a asp-action="List" class="btn btn-dark btn-sm mr-2 float-end">Back To List</a>
+						<input type="submit" class="btn btn-primary btn-sm float-end mr-2" value="Submit" />
+					</div>
+				</form>
+			</div>
+		</div>                
+	</div>
+
+
