@@ -84,7 +84,7 @@ We will have methods that return a Task or Task<T> object. Defining these method
   
 LINQ introduced the new type called Expression that represents strongly typed lambda expression. It means lambda expression can also be assigned to Expression<TDelegate> type. The .NET compiler converts the lambda expression which is assigned to Expression<TDelegate> into an Expression tree instead of executable code. This expression tree is used by remote LINQ query providers as a data structure to build a runtime query out of it .
   
-This is how I created the method in the "BaseRepo" in the Science_News.Infrastructure layer. You can see more here.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/blob/master/Science_News.Infrastructure/Repositories/BaseRepo.cs)
+This is how I created the method in the "BaseRepo" in the "Science_News.Infrastructure" layer. You can see more here.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/blob/master/Science_News.Infrastructure/Repositories/BaseRepo.cs)
 ```csharp
   public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> select,
                                                                   Expression<Func<T, bool>> where,
@@ -115,7 +115,7 @@ This is how I created the method in the "BaseRepo" in the Science_News.Infrastru
 ```
   
   
-This is how I created the body of the method in the "PostServices.cs" class in the "PostService" in the "Services" folder in the Science_News.Application layer. You can see more here.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Application/Services)
+This is how I created the body of the method in the "PostServices.cs" class in the "PostService" in the "Services" folder in the "Science_News.Application" layer. You can see more here.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Application/Services)
   
    ```csharp
         public Task<List<PostVM>> GetPosts()
