@@ -1,8 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Science_News.Application.IoC;
-
+using Science_News.Domain.Entities;
 using Science_News.Infrastructure;
 
 
@@ -17,6 +18,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 3;
+    options.Password.RequireLowercase = false;
+
+
+
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+
+
+
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 

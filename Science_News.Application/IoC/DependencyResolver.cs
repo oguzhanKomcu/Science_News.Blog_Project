@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Science_News.Application.AutoMapper;
+using Science_News.Application.Services.AppUserService;
 using Science_News.Application.Services.AuthorService;
 using Science_News.Application.Services.CategoryService;
 using Science_News.Application.Services.PostService;
@@ -30,7 +31,7 @@ namespace Science_News.Application.IoC
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<AuthorService>().As<IAuthorService>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
-            //builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<AppUserService>().As<IAppUserService>().InstancePerLifetimeScope();
 
 
             builder.Register(context => new MapperConfiguration(cfg =>

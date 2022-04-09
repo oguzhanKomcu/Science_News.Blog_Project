@@ -1,12 +1,122 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Query;
+using Science_News.Application.Models.DTOs.AppUser;
+using Science_News.Domain.Entities;
+using Science_News.Domain.Repositories;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Science_News.Application.Services.AppUserService
 {
-    internal class AppUserService
+    public class AppUserService : IAppUserService
     {
+        private readonly IAppUserRepo _appUserRepo;
+        private readonly IMapper _mapper;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+
+        public AppUserService(IAppUserRepo appUserRepo, IMapper mapper, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        {
+            _appUserRepo = appUserRepo;
+            _mapper = mapper;
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
+        public async Task<UpdateUserProfilDTO> GetById(string id)
+        {
+            var user = await _appUserRepo.GetFilteredFirstOrDefault(
+                select: x => new UpdateUserProfilDTO
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    Password = x.PasswordHash,
+                    Email = x.Email,
+                    ImagePath = x.ImagePath,
+                },
+                where: x => x.Id == id);
+
+
+            return user;
+
+        }
+
+        public Task<string> GetUserByName(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<SignInResult> Login(LoginDTO model)
+        {
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+
+            return result;
+        }
+
+
+
+        public async Task LogOut()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> Register(RegisterDTO model)
+        {
+            var user = _mapper.Map<AppUser>(model);
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+            }
+
+            return result;
+        }
+
+        public async Task UpdateUser(UpdateUserProfilDTO model)
+        {
+            var user = _mapper.Map<AppUser>(model);
+            if (user.UploadPath != null)
+            {
+                using var image = Image.Load(model.UploadPath.OpenReadStream());
+                image.Mutate(x => x.Resize(600, 560));
+                Guid guid = Guid.NewGuid();
+                image.Save($"wwwroot/images/{guid}.jpg");
+                user.ImagePath = ($"/images/{guid}.jpg");
+
+                await _appUserRepo.Update(user);
+
+            }
+
+            if (model.Password != null)
+            {
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (model.UserName != null)
+            {
+                var isUserNameExist = await _userManager.FindByNameAsync(model.UserName);
+                if (isUserNameExist == null)
+                {
+                    await _userManager.SetUserNameAsync(user, model.UserName);
+                }
+            }
+
+            if (model.Email != null)
+            {
+                var isUserEmailExist = await _userManager.FindByEmailAsync(model.Email);
+                if (isUserEmailExist == null)
+                {
+                    await _userManager.SetEmailAsync(user, model.Email);
+                }
+            }
+        }
     }
 }
