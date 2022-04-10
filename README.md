@@ -12,10 +12,10 @@
 
 DDD is created with 4-tier architecture.
 
-- Domain Layer
-- Application Layer
-- Presentation Layer
-- Infrastructure Layer
+- [Domain Layer](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Domain)
+- [Application Layer](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Application)
+- [Presentation Layer](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Presentation)
+- [Infrastructure Layer](https://github.com/oguzhanKomcu/Science_News.Blog_Project/tree/master/Science_News.Infrastructure)
 
 ### Domain Layer
 
