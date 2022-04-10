@@ -138,4 +138,37 @@ This is how I created the body of the method in the "PostServices.cs" class in t
         }
   
 ```
+## AUTOFAC 
+  Autofac is a .Net based IoC container. As classes interact with each other, it manages the dependencies between them that keep applications flexible as they grow in size and complexity. Autofac is the most widely used DI/IoC container for ASP.NET and was also fully compatible with .NET Core.
+
+As you know, there is an embedded IOC container in Asp.Net Core. However, as the classes are nested, the container becomes inseparable from each other and in this case we use more functional functions of Autofac.
+
+When working on large-scale projects, having the extensive capability of Autofac can be quite useful and even indispensable.  
   
+### HOW IS IT APPLIED?
+I created my container in "DependencyResolver" class inside "IoC" folder in "Science_News.Application" layer. You can see more here.[GitHub Pages](https://github.com/oguzhanKomcu/Science_News.Blog_Project/blob/master/Science_News.Application/IoC/DependencyResolver.cs)
+  
+I showed an example here.
+  
+   ```csharp
+       protected override void Load(ContainerBuilder builder)
+        {
+ 
+            builder.RegisterType<CategoryRepo>().As<ICategoryRepo>().InstancePerLifetimeScope();
+        }
+  
+```
+ I implemented this method to enable the Autofac DI container in my "Program.cs" class in the Presentation layer.
+    
+   ```csharp
+      
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+    builder.RegisterModule(new DependencyResolver());
+});
+  var app = builder.Build();
+  
+```
+
