@@ -1,8 +1,7 @@
-﻿@model RegisterDTO
+﻿@model LoginDTO
 @{
     Layout = null;
 }
-
 
 
 <!DOCTYPE html>
@@ -10,19 +9,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Register</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
-    <div class="conteiner mt-5">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Register</h4>
+                        <h4 class="card-title">Sing In</h4>
                     </div>
-                    <form asp-action="Register">
+                    <form asp-action="LogIn" asp-route-returnUrl="@ViewData["ReturnUrl"]">
                         <div class="card-body">
                             <div class="form-group">
                                 <label asp-for="UserName"></label>
@@ -30,36 +29,20 @@
                                 <span asp-validation-for="UserName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Email"></label>
-                                <input asp-for="Email" class="form-control" placeholder="User Name" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" placeholder="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="ConfirmPassword"></label>
-                                <input asp-for="ConfirmPassword" class="form-control" placeholder="User Name" />
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                            </div>
-
-
                         </div>
                         <div class="card-footer">
                             <input type="submit" class="btn-success btn-sm float-end mr-2" value="Submit" />
-                            <a asp-action="LogIn" class="btn-primary btn-sm float-end mr-2 ml-2">Log In</a>
-
+                            <a asp-action="Register" class="btn-primary btn-sm float-end mr-2 ml-2">Register</a>
                         </div>
-
                     </form>
                 </div>
-
             </div>
             <div class="col-sm-3"></div>
-
-
-
         </div>
-
     </div>
-
-
 </body>
 </html>

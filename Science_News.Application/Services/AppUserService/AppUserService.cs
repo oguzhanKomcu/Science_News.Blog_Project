@@ -30,7 +30,7 @@ namespace Science_News.Application.Services.AppUserService
             _signInManager = signInManager;
         }
 
-        public async Task<UpdateUserProfilDTO> GetById(string id)
+        public async Task<UpdateUserProfilDTO> GetByUserName(string userName)
         {
             var user = await _appUserRepo.GetFilteredFirstOrDefault(
                 select: x => new UpdateUserProfilDTO
@@ -41,17 +41,14 @@ namespace Science_News.Application.Services.AppUserService
                     Email = x.Email,
                     ImagePath = x.ImagePath,
                 },
-                where: x => x.Id == id);
+                where: x => x.UserName == userName);
 
 
             return user;
 
         }
 
-        public Task<string> GetUserByName(string userName)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<SignInResult> Login(LoginDTO model)
         {

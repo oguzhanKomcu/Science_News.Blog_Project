@@ -18,9 +18,9 @@ namespace Science_News.Application.Services.AppUserService
 
         Task UpdateUser(UpdateUserProfilDTO model);
 
-        Task<UpdateUserProfilDTO> GetById(string id);
+        Task<UpdateUserProfilDTO> GetByUserName(string userName);
 
-        Task<string> GetUserByName(string userName);
+    
 
         
     }

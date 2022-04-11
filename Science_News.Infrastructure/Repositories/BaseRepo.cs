@@ -83,7 +83,8 @@ namespace Science_News.Infrastructure.Repositories
 
         public async Task<List<TResult>> GetFilteredList<TResult>(Expression<Func<T, TResult>> select,
                                                                   Expression<Func<T, bool>> where,
-                                                                  Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+                                                                  Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                                                  Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = table;
 

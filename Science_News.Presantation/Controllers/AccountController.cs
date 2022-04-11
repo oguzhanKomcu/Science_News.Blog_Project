@@ -52,8 +52,8 @@ namespace Science_News.Presantation.Controllers
             return View(model);
         }
 
-
-        public IActionResult Login(string returnUrl)
+        [AllowAnonymous]
+        public IActionResult Login(string returnUrl= "/")
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -65,7 +65,7 @@ namespace Science_News.Presantation.Controllers
         }
 
         [HttpPost, AllowAnonymous]
-        public async Task<IActionResult> Login(LoginDTO model, string returnUrl)
+        public async Task<IActionResult> Login(LoginDTO model, string returnUrl = "/")
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace Science_News.Presantation.Controllers
             return View(model);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToLocal(string returnUrl="/")
         {   
             
             if (Url.IsLocalUrl(returnUrl))
@@ -92,6 +92,33 @@ namespace Science_News.Presantation.Controllers
             {
                 return RedirectToAction("Index", nameof(Areas.Member.Controllers.HomeController));
             }
+        }
+
+        public async Task<IActionResult> Edit(string userName)
+        {
+            var user = await _appUserService.GetByUserName(userName);
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UpdateUserProfilDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _appUserService.UpdateUser(model);
+                TempData["Success"] = "Your profile has been updated ..!!";
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+
+               
+            }
+            else
+            {
+                TempData["Error"] = "Your profile hasn't been updated ..!!";
+
+                return View(model);
+            }
+        
+           
         }
     }
 }
