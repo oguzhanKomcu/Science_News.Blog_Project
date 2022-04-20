@@ -33,11 +33,11 @@ namespace Science_News.Application.Services.AuthorService
 
             if (author.UploadPath != null)
             {
-                using var image = Image.Load(model.UploadPath.OpenReadStream()); 
-                image.Mutate(x => x.Resize(600, 560)); 
-            
-                image.Save($"wwwroot/images/"); 
-                author.ImagePath = ($"/images/");
+                using var image = Image.Load(model.UploadPath.OpenReadStream());
+                image.Mutate(x => x.Resize(600, 560));
+                string guid = Guid.NewGuid().ToString();
+                image.Save($"wwwroot/images/author/{guid}.jpg");
+                author.ImagePath = $"/images/author/{guid}.jpg";
                 await _authorRepo.Create(author);
             }
             else
@@ -121,11 +121,10 @@ namespace Science_News.Application.Services.AuthorService
             {
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(600, 560));
-                Guid guid = Guid.NewGuid();
-                image.Save($"wwwroot/images/{guid}.jpg");
-                author.ImagePath = ($"/images/{guid}.jpg");
-
-                await _authorRepo.Update(author);
+                string guid = Guid.NewGuid().ToString();
+                image.Save($"wwwroot/images/author/{guid}.jpg");
+                author.ImagePath = $"/images/author/{guid}.jpg";
+                await _authorRepo.Create(author);
             }
             else
             {

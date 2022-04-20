@@ -16,7 +16,7 @@ namespace Science_News.Domain.Entities
         public string Content { get; set; }
 
         [NotMapped]
-        public IFormFile UploadPath { get; set; }
+        public IFormFile? UploadPath { get; set; }
 
         public string ImagePath { get; set; }
 

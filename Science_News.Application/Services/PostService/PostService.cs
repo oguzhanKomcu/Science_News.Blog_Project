@@ -40,9 +40,9 @@ namespace Science_News.Application.Services.PostService
             {
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(600, 560));
-                Guid guid = Guid.NewGuid();
-                image.Save($"wwwroot/images/{guid}.jpg");
-                post.ImagePath = ($"/image/{guid}.jpg");
+                string guid = Guid.NewGuid().ToString();
+                image.Save($"wwwroot/images/post/{guid}.jpg");
+                post.ImagePath = $"/images/post/{guid}.jpg";
                 await _postRepo.Create(post);
 
             }
@@ -209,11 +209,11 @@ namespace Science_News.Application.Services.PostService
             {
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(600, 560));
-                Guid guid = Guid.NewGuid();
-                image.Save($"wwwroot/images/{guid}.jpg");
-                post.ImagePath = ($"/images/{guid}.jpg");
+                string guid = Guid.NewGuid().ToString();
+                image.Save($"wwwroot/images/post/{guid}.jpg");
+                post.ImagePath = $"/images/post/{guid}.jpg";
+                await _postRepo.Create(post);
 
-                await _postRepo.Update(post);
             }
             else
             {

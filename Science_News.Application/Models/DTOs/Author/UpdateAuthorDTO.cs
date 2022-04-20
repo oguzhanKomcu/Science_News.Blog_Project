@@ -12,7 +12,7 @@ namespace Science_News.Application.Models.DTOs.Author
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public IFormFile UploadPath { get; set; }
+        public IFormFile? UploadPath { get; set; }
         public string ImagePath { get; set; }
     }
 }

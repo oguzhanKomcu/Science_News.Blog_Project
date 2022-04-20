@@ -22,7 +22,7 @@ namespace Science_News.Application.Models.DTOs.Author
         public string LastName { get; set; }
 
         [PictureFileExtension] 
-        public IFormFile UploadPath { get; set; }
+        public IFormFile? UploadPath { get; set; }
 
 
         public string? ImagePath { get; set; }

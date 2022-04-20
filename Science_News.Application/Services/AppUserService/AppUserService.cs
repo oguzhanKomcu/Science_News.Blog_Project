@@ -81,13 +81,13 @@ namespace Science_News.Application.Services.AppUserService
             var user = _mapper.Map<AppUser>(model);
             if (user.UploadPath != null)
             {
+
                 using var image = Image.Load(model.UploadPath.OpenReadStream());
                 image.Mutate(x => x.Resize(600, 560));
-                Guid guid = Guid.NewGuid();
-                image.Save($"wwwroot/images/{guid}.jpg");
-                user.ImagePath = ($"/images/{guid}.jpg");
-
-                await _appUserRepo.Update(user);
+                string guid = Guid.NewGuid().ToString();
+                image.Save($"wwwroot/images/appuser/{guid}.jpg");
+                user.ImagePath = $"/images/appuser/{guid}.jpg";
+                await _appUserRepo.Create(user);
 
             }
 
